@@ -11,7 +11,7 @@ import MovieModal from "../MovieModal/MovieModal";
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [movie, setMovie] = useState<Movie[]>([]);
+  const [movie, setMovie] = useState<Movie | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [onModal, setOnModal] = useState(false);
@@ -32,12 +32,13 @@ function App() {
     }
     render();
   };
-  const onSelect = (id: number) => {
+  const onSelect = (movieSelect: Movie) => {
     setOnModal(true);
-    setMovie(movies.filter((movie) => movie.id === id));
+    setMovie(movieSelect);
   };
   const onclose = () => {
     setOnModal(false);
+    setMovie(null);
   };
   return (
     <>
@@ -52,7 +53,7 @@ function App() {
         />
       )}
       {isError && <ErrorMessage />}
-      {onModal && (
+      {onModal && movie && (
         <MovieModal
           movie={movie}
           onClose={onclose}
