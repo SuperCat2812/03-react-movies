@@ -14,7 +14,7 @@ function App() {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [onModal, setOnModal] = useState(false);
+
   const onSubmit = (query: string) => {
     async function render() {
       try {
@@ -33,11 +33,9 @@ function App() {
     render();
   };
   const onSelect = (movieSelect: Movie) => {
-    setOnModal(true);
     setMovie(movieSelect);
   };
   const onclose = () => {
-    setOnModal(false);
     setMovie(null);
   };
   return (
@@ -53,7 +51,7 @@ function App() {
         />
       )}
       {isError && <ErrorMessage />}
-      {onModal && movie && (
+      {movie && (
         <MovieModal
           movie={movie}
           onClose={onclose}
