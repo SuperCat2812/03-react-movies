@@ -32,9 +32,7 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
       role="dialog"
       aria-modal="true"
       onClick={close}>
-      <div
-        className={css.modal}
-        key={movie.id}>
+      <div className={css.modal}>
         <button
           className={css.closeButton}
           aria-label="Close modal"
